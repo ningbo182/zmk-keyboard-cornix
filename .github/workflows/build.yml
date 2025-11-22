@@ -10,37 +10,35 @@ permissions:
   contents: write
 
 jobs:
-  # JOB 1: Build Firmware (Standard)
+  # JOB 1: Build Firmware
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
 
-  # JOB 2: Draw Keymap (Manual Mode)
+  # JOB 2: Draw Keymap (Manual Mode with Fix)
   draw:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      # 1. Install the Drawing Tool
       - name: Install Keymap Drawer
         run: pipx install keymap-drawer
 
-      # 2. Generate the Image
       - name: Generate SVG
         run: |
           mkdir -p img
-          # Parse ZMK code to YAML
+          
+          # 1. Parse the ZMK file
           keymap -c config/keymap_drawer.config.yaml parse -z config/cornix.keymap > cornix_parsed.yaml
-          # Draw YAML to SVG
-          keymap -c config/keymap_drawer.config.yaml draw cornix_parsed.yaml > img/cornix.svg
+          
+          # 2. Draw the SVG (Explicitly pointing to the JSON layout)
+          keymap -c config/keymap_drawer.config.yaml draw cornix_parsed.yaml -j config/cornix.json > img/cornix.svg
 
-      # 3. Upload Artifact (This fixes your error!)
       - name: Upload Keymap Image
         uses: actions/upload-artifact@v4
         with:
           name: keymap-drawer
           path: img/cornix.svg
 
-      # 4. Commit Image to Repo (So it shows in Readme)
       - name: Commit Keymap Update
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
