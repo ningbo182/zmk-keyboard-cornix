@@ -1,0 +1,13 @@
+draw_config:
+  key_w: 60
+  key_h: 56
+  split_gap: 30.0
+  # Optional: Customize colors or style here if needed later
+
+parse_config:
+  # 1. Point to your ZMK code
+  zmk_keymap: "config/cornix.keymap"
+  
+  # 2. Point to your physical layout geometry
+  # (Must be named 'qmk_json_path' even for ZMK)
+  qmk_json_path: "config/cornix.json"
