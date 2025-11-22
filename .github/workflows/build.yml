@@ -1,21 +1,20 @@
-name: Build Firmware & Draw Keymap
+name: Build & Draw
 on:
-  workflow_dispatch:  # Allows manual triggering
+  workflow_dispatch:
   push:
     paths:
       - "boards/*"
       - "config/*"
 
-# Global permissions required for the bot to push the SVG back to your repo
 permissions:
-  contents: write
+  contents: write  # Necessary for the 'draw' job to save the image to your repo
 
 jobs:
   # JOB 1: Build Firmware
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
 
-  # JOB 2: Draw Keymap (SVG Only)
+  # JOB 2: Draw Keymap (SVG)
   draw:
     uses: caksoylar/keymap-drawer/.github/workflows/draw-zmk.yml@main
     permissions:
@@ -25,42 +24,3 @@ jobs:
       config_path: "config/keymap_drawer.config.yaml"
       output_folder: "img"
       commit_message: "Draw keymap graphic [skip ci]"
-      # strict_mode: false # Uncomment if your keymap has parsing errors but compiles fine
-
-  # JOB 3: Combine Everything
-  combine:
-    needs: [build, draw]
-    runs-on: ubuntu-latest
-    name: Package Assets
-    steps:
-      - name: Download Firmware
-        uses: actions/download-artifact@v4
-        with:
-          name: firmware
-          path: artifacts/firmware
-
-      - name: Download Keymap SVGs
-        uses: actions/download-artifact@v4
-        with:
-          # Must match the artifact name from the reusable workflow
-          name: keymap-drawer-renders 
-          path: artifacts/images
-
-      - name: Prepare Release Folder
-        run: |
-          mkdir release_package
-          
-          # Copy Firmware (Recursive copy is safer)
-          cp -r artifacts/firmware/* release_package/
-          
-          # Copy SVGs
-          cp -r artifacts/images/* release_package/
-          
-          # List content for debugging (visible in GitHub logs)
-          ls -R release_package/
-
-      - name: Upload Combined Package
-        uses: actions/upload-artifact@v4
-        with:
-          name: Firmware-and-Keymap
-          path: release_package/
