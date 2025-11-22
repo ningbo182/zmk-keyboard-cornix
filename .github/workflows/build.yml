@@ -10,50 +10,67 @@ permissions:
   contents: write
 
 jobs:
-  # JOB 1: Build Firmware
+  # JOB 1: Build Firmware (Standard)
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
 
-  # JOB 2: Draw Keymap
+  # JOB 2: Draw Keymap (Manual Mode)
   draw:
-    uses: caksoylar/keymap-drawer/.github/workflows/draw-zmk.yml@main
-    with:
-      keymap_patterns: "config/cornix.keymap"
-      config_path: "config/keymap_drawer.config.yaml"
-      output_folder: "img"
-      commit_message: "Draw keymap graphic [skip ci]"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-  # JOB 3: Combine Everything (New!)
+      # 1. Install the Drawing Tool
+      - name: Install Keymap Drawer
+        run: pipx install keymap-drawer
+
+      # 2. Generate the Image
+      - name: Generate SVG
+        run: |
+          mkdir -p img
+          # Parse ZMK code to YAML
+          keymap -c config/keymap_drawer.config.yaml parse -z config/cornix.keymap > cornix_parsed.yaml
+          # Draw YAML to SVG
+          keymap -c config/keymap_drawer.config.yaml draw cornix_parsed.yaml > img/cornix.svg
+
+      # 3. Upload Artifact (This fixes your error!)
+      - name: Upload Keymap Image
+        uses: actions/upload-artifact@v4
+        with:
+          name: keymap-drawer
+          path: img/cornix.svg
+
+      # 4. Commit Image to Repo (So it shows in Readme)
+      - name: Commit Keymap Update
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Draw keymap graphic [skip ci]"
+          file_pattern: "img/*.svg"
+
+  # JOB 3: Combine Everything
   combine:
     needs: [build, draw]
     runs-on: ubuntu-latest
     name: Package Assets
     steps:
-      # 1. Download the Firmware from Job 1
       - name: Download Firmware
         uses: actions/download-artifact@v4
         with:
           name: firmware
           path: artifacts/firmware
 
-      # 2. Download the Image from Job 2
-      # (The draw workflow automatically names its artifact "keymap-drawer")
       - name: Download Keymap Image
         uses: actions/download-artifact@v4
         with:
           name: keymap-drawer
           path: artifacts/image
 
-      # 3. Organize files into one folder
       - name: Prepare Release Folder
         run: |
           mkdir release_package
-          # Copy firmware files (uf2, etc.)
           cp artifacts/firmware/* release_package/
-          # Copy the SVG image
-          cp artifacts/image/img/*.svg release_package/
+          cp artifacts/image/cornix.svg release_package/
 
-      # 4. Upload the single combined artifact
       - name: Upload Combined Package
         uses: actions/upload-artifact@v4
         with:
