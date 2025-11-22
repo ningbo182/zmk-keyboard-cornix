@@ -6,41 +6,27 @@ on:
       - "boards/*"
       - "config/*"
 
-# Grant permission to write the generated SVG back to the repo
+# Allow the bot to write the image back to your repository
 permissions:
   contents: write
 
 jobs:
-  # Job 1: Build the ZMK Firmware
+  # JOB 1: Build Firmware
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
 
-  # Job 2: Draw the Keymap Graphic
+  # JOB 2: Draw Keymap (Using the correct Reusable Workflow)
   draw:
-    runs-on: ubuntu-latest
-    name: Draw Keymap
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Draw Keymap
-        uses: caksoylar/keymap-drawer-action@v0
-        with:
-          # The ZMK file to parse
-          keymap: "config/cornix.keymap"
-          
-          # The drawer configuration (links to your json geometry)
-          config_path: "config/keymap_drawer.config.yaml"
-          
-          # Where to save the image
-          output_folder: "img"
-          
-          # Commit the image back to the repo
-          amend_commit: false
-          commit_message: "Draw keymap graphic [skip ci]"
-
-      # Optional: Upload image as artifact so you can download it from Actions tab
-      - name: Upload Keymap Image
-        uses: actions/upload-artifact@v4
-        with:
-          name: keymap-image
-          path: img/*.svg
+    uses: caksoylar/keymap-drawer/.github/workflows/draw-zmk.yml@main
+    with:
+      # 1. Point to your specific keymap file
+      keymap_patterns: "config/cornix.keymap"
+      
+      # 2. Point to the config file (which links to your JSON geometry)
+      config_path: "config/keymap_drawer.config.yaml"
+      
+      # 3. Where to save the resulting SVG
+      output_folder: "img"
+      
+      # 4. Optional: clean up commit message
+      commit_message: "Draw keymap graphic [skip ci]"
