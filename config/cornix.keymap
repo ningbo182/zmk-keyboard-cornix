@@ -163,8 +163,8 @@
 
         cb_ltm {
             bindings = <&kp ESC>;
-            key-positions = <2 4>;
-            layers = <0 6>;
+            key-positions = <0 1>;
+            layers = <0>;
         };
     };
 
