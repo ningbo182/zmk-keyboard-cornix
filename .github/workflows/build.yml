@@ -6,7 +6,6 @@ on:
       - "boards/*"
       - "config/*"
 
-# Allow the bot to write the image back to your repository
 permissions:
   contents: write
 
@@ -15,18 +14,48 @@ jobs:
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
 
-  # JOB 2: Draw Keymap (Using the correct Reusable Workflow)
+  # JOB 2: Draw Keymap
   draw:
     uses: caksoylar/keymap-drawer/.github/workflows/draw-zmk.yml@main
     with:
-      # 1. Point to your specific keymap file
       keymap_patterns: "config/cornix.keymap"
-      
-      # 2. Point to the config file (which links to your JSON geometry)
       config_path: "config/keymap_drawer.config.yaml"
-      
-      # 3. Where to save the resulting SVG
       output_folder: "img"
-      
-      # 4. Optional: clean up commit message
       commit_message: "Draw keymap graphic [skip ci]"
+
+  # JOB 3: Combine Everything (New!)
+  combine:
+    needs: [build, draw]
+    runs-on: ubuntu-latest
+    name: Package Assets
+    steps:
+      # 1. Download the Firmware from Job 1
+      - name: Download Firmware
+        uses: actions/download-artifact@v4
+        with:
+          name: firmware
+          path: artifacts/firmware
+
+      # 2. Download the Image from Job 2
+      # (The draw workflow automatically names its artifact "keymap-drawer")
+      - name: Download Keymap Image
+        uses: actions/download-artifact@v4
+        with:
+          name: keymap-drawer
+          path: artifacts/image
+
+      # 3. Organize files into one folder
+      - name: Prepare Release Folder
+        run: |
+          mkdir release_package
+          # Copy firmware files (uf2, etc.)
+          cp artifacts/firmware/* release_package/
+          # Copy the SVG image
+          cp artifacts/image/img/*.svg release_package/
+
+      # 4. Upload the single combined artifact
+      - name: Upload Combined Package
+        uses: actions/upload-artifact@v4
+        with:
+          name: Firmware-and-Keymap
+          path: release_package/
