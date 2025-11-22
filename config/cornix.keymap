@@ -164,29 +164,7 @@
         cb_ltm {
             bindings = <&kp ESC>;
             key-positions = <2 4>;
-            layers = <0 5>;
-        };
-
-        cb_lm {
-            bindings = <&kp TAB>;
-            key-positions = <14 16>;
-            layers = <0 5>;
-        };
-
-        cb_enter {
-            bindings = <&kp RET>;
-            key-positions = <21 19>;
-            layers = <0 5>;
-        };
-
-        layer3 {
-            bindings = <&kp N3>;
-            key-positions = <5 6>;
-        };
-
-        layer4 {
-            bindings = <&kp N4>;
-            key-positions = <5 6>;
+            layers = <0 6>;
         };
     };
 
@@ -207,7 +185,7 @@
 &kp TAB         &kp Q          &kp W         &kp E                      &kp R                &kp T                                 &kp Y        &kp U                 &kp I            &kp O         &kp P                  &kp BACKSPACE
 &kp ESC         &hm_l LCTRL A  &hm_l LALT S  &hm_l LGUI D               &hm_shift_l LSHFT F  &kp G                                 &kp H        &hm_shift_r RSHFT J   &hm_r RGUI K     &hm_r RALT L  &hm_r RCTRL BACKSLASH  &kp ENTER
 &kp LEFT_SHIFT  &hm_l LGUI Z   &kp X         &kp C                      &kp V                &kp B        &kp C_PLAY_PAUSE  &none  &kp N        &kp M                 &kp COMMA        &kp DOT       &kp UP_ARROW           &kp SLASH
-&caps_word      &none          &none         &left_gui LEFT_GUI ESCAPE  &lt 1 SPACE          &lt 2 ENTER                           &lt 4 ENTER  &right_space 3 SPACE  &lt 6 BACKSPACE  &kp LEFT      &kp DOWN_ARROW         &kp RIGHT
+&caps_word      &none          &none         &left_gui LEFT_GUI ESCAPE  &lt 1 SPACE          &lt 2 ENTER                           &lt 4 ENTER  &right_space 3 SPACE  &lt 5 BACKSPACE  &kp LEFT      &kp DOWN_ARROW         &kp RIGHT
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
@@ -226,10 +204,10 @@
         Mouse_Num_layer {
             display-name = "Mouse and Number Row";
             bindings = <
-&none  &kp NUMBER_1      &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4    &kp N5                  &kp NUMBER_6    &kp N7          &kp N8        &kp N9           &kp N0  &none
-&none  &kp LEFT_CONTROL  &kp LEFT_ALT  &kp LEFT_GUI  &kp LEFT_SHIFT  &none                   &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &none   &none
-&none  &none             &none         &none         &none           &none   &trans  &trans  &none           &none           &none         &none            &none   &none
-&none  &none             &none         &none         &none           &none                   &mkp RCLK       &mkp LCLK       &mkp MCLK     &none            &none   &none
+&none           &kp NUMBER_1      &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4              &kp N5                     &kp NUMBER_6    &kp N7          &kp N8        &kp N9           &kp N0  &none
+&none           &kp LEFT_CONTROL  &kp LEFT_ALT  &kp LEFT_GUI  &mt LEFT_SHIFT SEMICOLON  &kp MINUS                  &kp EQUAL       &kp SQT         &none         &none            &none   &none
+&kp LEFT_SHIFT  &none             &none         &none         &none                     &none      &trans  &trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT  &none   &none
+&none           &none             &none         &none         &none                     &none                      &mkp RCLK       &mkp LCLK       &mkp MCLK     &none            &none   &none
             >;
         };
 
@@ -274,6 +252,24 @@
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
+        Function_layer {
+            display-name = "Function";
+
+            // ----------------------------------------------------------------------------------------------------------------------------
+            // | BTCLR  |  BT1    |  BT2    |   BT3   |   BT4   |   BT5   |                  |      |      |       |      |       |       |
+            // | moDEBUG| RGB_HUD | RGB_HUI | RGB_SAD | RGB_SAI | RGB_EFF |                  |      |      |       |      |       |       |
+            // | EXTPWR | RGB_BRD | RGB_BRI |         |         |         |                  |      |      |       |      |       |       |
+            // |        |         |         |         |         |         | RGB_TOG | |      |      |      |       |      |       |       |
+            //                    |         |         |         |         |         | |      |      |      |       |      |
+
+            bindings = <
+&none  &kp F12  &kp F7  &kp F8      &kp F9     &kp PRINTSCREEN                  &none  &none            &none          &none          &none              &none
+&none  &kp F11  &kp F4  &kp F5      &kp F6     &kp SCROLLLOCK                   &none  &kp RIGHT_SHIFT  &kp RIGHT_GUI  &kp RIGHT_ALT  &kp RIGHT_CONTROL  &none
+&none  &kp F10  &kp F1  &kp F2      &kp F3     &kp PAUSE_BREAK  &trans  &trans  &none  &none            &none          &none          &none              &none
+&none  &none    &none   &kp C_MENU  &kp SPACE  &kp TAB                          &none  &none            &none          &none          &none              &none
+            >;
+        };
+
         Media_layer {
             display-name = "Media";
 
@@ -292,24 +288,6 @@
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
-        };
-
-        Function_layer {
-            display-name = "Function";
-
-            // ----------------------------------------------------------------------------------------------------------------------------
-            // | BTCLR  |  BT1    |  BT2    |   BT3   |   BT4   |   BT5   |                  |      |      |       |      |       |       |
-            // | moDEBUG| RGB_HUD | RGB_HUI | RGB_SAD | RGB_SAI | RGB_EFF |                  |      |      |       |      |       |       |
-            // | EXTPWR | RGB_BRD | RGB_BRI |         |         |         |                  |      |      |       |      |       |       |
-            // |        |         |         |         |         |         | RGB_TOG | |      |      |      |       |      |       |       |
-            //                    |         |         |         |         |         | |      |      |      |       |      |
-
-            bindings = <
-&none  &kp F12  &kp F7  &kp F8      &kp F9     &kp PRINTSCREEN                  &none  &none            &none          &none          &none              &none
-&none  &kp F11  &kp F4  &kp F5      &kp F6     &kp SCROLLLOCK                   &none  &kp RIGHT_SHIFT  &kp RIGHT_GUI  &kp RIGHT_ALT  &kp RIGHT_CONTROL  &none
-&none  &kp F10  &kp F1  &kp F2      &kp F3     &kp PAUSE_BREAK  &trans  &trans  &none  &none            &none          &none          &none              &none
-&none  &none    &none   &kp C_MENU  &kp SPACE  &kp TAB                          &none  &none            &none          &none          &none              &none
-            >;
         };
     };
 };
