@@ -44,7 +44,7 @@ layers:
   - ''
   - {t: ESCAPE, h: LEFT GUI}
   - {t: SPACE, h: Navigation}
-  - {t: ENTER, h: Mouse and Number Row}
+  - {t: ENTER, h: Top Number Row}
   - {t: ENTER, h: Symbols}
   - {t: SPACE, h: Numbers}
   - {t: BACKSPACE, h: Function}
@@ -65,10 +65,10 @@ layers:
   - Gui+0
   - ''
   - ''
-  - LEFT CONTROL
-  - LEFT ALT
-  - LEFT GUI
-  - LEFT SHIFT
+  - '&mmv MOVE_LEFT'
+  - '&mmv MOVE_DOWN'
+  - '&mmv MOVE_UP'
+  - '&mmv MOVE_RIGHT'
   - ''
   - LEFT
   - DOWN
@@ -96,13 +96,13 @@ layers:
   - ''
   - {type: held}
   - ''
+  - '&mkp RCLK'
+  - '&mkp LCLK'
+  - '&mkp MCLK'
   - ''
   - ''
   - ''
-  - ''
-  - ''
-  - ''
-  Mouse and Number Row:
+  Top Number Row:
   - ''
   - '1'
   - '2'
@@ -114,7 +114,7 @@ layers:
   - '8'
   - '9'
   - '0'
-  - ''
+  - {t: ▽, type: trans}
   - ''
   - LEFT CONTROL
   - LEFT ALT
@@ -125,8 +125,8 @@ layers:
   - ''''
   - ''
   - ''
-  - ''
-  - ''
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - LEFT SHIFT
   - ''
   - ''
@@ -135,12 +135,12 @@ layers:
   - ''
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - '&mmv MOVE_LEFT'
-  - '&mmv MOVE_DOWN'
-  - '&mmv MOVE_UP'
-  - '&mmv MOVE_RIGHT'
   - ''
   - ''
+  - ''
+  - ''
+  - ''
+  - {t: ▽, type: trans}
   - ''
   - ''
   - ''
@@ -165,7 +165,7 @@ layers:
   - ''
   - ''
   - ''
-  - ''
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - ;
   - '4'
@@ -177,7 +177,7 @@ layers:
   - RIGHT GUI
   - RIGHT ALT
   - RIGHT CONTROL
-  - ''
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - '`'
   - '1'
