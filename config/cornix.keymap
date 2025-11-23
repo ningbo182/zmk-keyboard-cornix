@@ -185,7 +185,7 @@
 &kp TAB         &kp Q          &kp W         &kp E                      &kp R                &kp T                                 &kp Y        &kp U                 &kp I            &kp O         &kp P                  &kp BACKSPACE
 &kp ESC         &hm_l LCTRL A  &hm_l LALT S  &hm_l LGUI D               &hm_shift_l LSHFT F  &kp G                                 &kp H        &hm_shift_r RSHFT J   &hm_r RGUI K     &hm_r RALT L  &hm_r RCTRL BACKSLASH  &kp ENTER
 &kp LEFT_SHIFT  &hm_l LGUI Z   &kp X         &kp C                      &kp V                &kp B        &kp C_PLAY_PAUSE  &none  &kp N        &kp M                 &kp COMMA        &kp DOT       &kp UP_ARROW           &kp SLASH
-&caps_word      &none          &none         &left_gui LEFT_GUI ESCAPE  &lt 1 SPACE          &lt 2 ENTER                           &lt 4 ENTER  &right_space 3 SPACE  &lt 5 BACKSPACE  &kp LEFT      &kp DOWN_ARROW         &kp RIGHT
+&caps_word      &none          &kp LEFT_ALT  &left_gui LEFT_GUI ESCAPE  &lt 1 SPACE          &lt 2 ENTER                           &lt 4 ENTER  &right_space 3 SPACE  &lt 5 BACKSPACE  &kp LEFT      &kp DOWN_ARROW         &kp RIGHT
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
@@ -204,10 +204,10 @@
         Num_layer {
             display-name = "Top Number Row";
             bindings = <
-&none           &kp NUMBER_1      &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4              &kp N5                     &kp NUMBER_6  &kp N7     &kp N8     &kp N9  &kp N0  &trans
-&none           &kp LEFT_CONTROL  &kp LEFT_ALT  &kp LEFT_GUI  &mt LEFT_SHIFT SEMICOLON  &kp MINUS                  &kp EQUAL     &kp SQT    &none      &none   &trans  &trans
-&kp LEFT_SHIFT  &none             &none         &none         &none                     &none      &trans  &trans  &none         &none      &none      &none   &none   &trans
-&none           &none             &none         &none         &none                     &none                      &mkp RCLK     &mkp LCLK  &mkp MCLK  &none   &none   &none
+&kp C_POWER     &kp NUMBER_1      &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4              &kp N5                     &kp NUMBER_6  &kp N7   &kp N8  &kp N9          &kp N0             &trans
+&none           &kp LEFT_CONTROL  &kp LEFT_ALT  &kp LEFT_GUI  &mt LEFT_SHIFT SEMICOLON  &kp MINUS                  &kp EQUAL     &kp SQT  &none   &none           &trans             &trans
+&kp LEFT_SHIFT  &none             &none         &none         &none                     &none      &trans  &trans  &none         &none    &trans  &trans          &kp C_VOLUME_UP    &trans
+&none           &none             &none         &none         &none                     &none                      &none         &none    &none   &kp C_PREVIOUS  &kp C_VOLUME_DOWN  &kp C_NEXT
             >;
         };
 
@@ -268,26 +268,6 @@
 &none  &kp F10  &kp F1  &kp F2      &kp F3     &kp PAUSE_BREAK  &trans  &trans  &none  &none            &none          &none          &none              &none
 &none  &none    &none   &kp C_MENU  &kp SPACE  &kp TAB                          &none  &none            &none          &none          &none              &none
             >;
-        };
-
-        Media_layer {
-            display-name = "Media";
-
-            // ------------------------------------------------------------------------------------------------------------
-            // |   `   |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   |       |
-            // |  ESC  |  Q  |  W  |  E   |  R   |  T   |                   |  Y   |  U    |  I    |  O   |   P   | BKSPC |
-            // |  TAB  |  A  |  S  |  D   |  F   |  G   |                   |  H   |  J    |  K    |  L   |   ;   |   '   |
-            // | SHIFT |  Z  |  X  |  C   |  V   |  B   |  MUTE  |  |       |  N   |  M    |  ,    |  .   |   /   | SHIFT |
-            //               | GUI | ALT  | CTRL | LOWER|  ENTER |  | SPACE | RAISE| CTRL  | ALT   | GUI  |
-
-            bindings = <
-&trans  &trans     &trans    &trans        &trans     &trans                  &trans  &trans  &trans  &trans          &trans             &trans
-&trans  &kp LCTRL  &kp LALT  &kp LEFT_GUI  &kp LSHFT  &trans                  &trans  &none   &none   &none           &none              &kp C_PLAY_PAUSE
-&none   &trans     &trans    &trans        &trans     &trans  &trans  &trans  &trans  &trans  &trans  &trans          &kp C_VOLUME_UP    &trans
-&none   &none      &none     &trans        &trans     &trans                  &trans  &trans  &trans  &kp C_PREVIOUS  &kp C_VOLUME_DOWN  &kp C_NEXT
-            >;
-
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
     };
 };
