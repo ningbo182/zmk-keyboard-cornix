@@ -41,7 +41,7 @@ layers:
   - /
   - '&caps_word'
   - ''
-  - ''
+  - LEFT ALT
   - {t: ESCAPE, h: LEFT GUI}
   - {t: SPACE, h: Navigation}
   - {t: ENTER, h: Top Number Row}
@@ -103,7 +103,7 @@ layers:
   - ''
   - ''
   Top Number Row:
-  - ''
+  - POWER
   - '1'
   - '2'
   - '3'
@@ -137,9 +137,9 @@ layers:
   - {t: ▽, type: trans}
   - ''
   - ''
-  - ''
-  - ''
-  - ''
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - VOLUME UP
   - {t: ▽, type: trans}
   - ''
   - ''
@@ -147,12 +147,12 @@ layers:
   - ''
   - ''
   - {type: held}
-  - '&mkp RCLK'
-  - '&mkp LCLK'
-  - '&mkp MCLK'
   - ''
   - ''
   - ''
+  - PREVIOUS
+  - VOLUME DOWN
+  - NEXT
   Numbers:
   - {t: ▽, type: trans}
   - '['
@@ -306,57 +306,6 @@ layers:
   - ''
   - ''
   - ''
-  Media:
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - LCTRL
-  - LALT
-  - LEFT GUI
-  - LSHFT
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - ''
-  - ''
-  - ''
-  - ''
-  - PLAY PAUSE
-  - ''
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - VOLUME UP
-  - {t: ▽, type: trans}
-  - ''
-  - ''
-  - ''
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - PREVIOUS
-  - VOLUME DOWN
-  - NEXT
 combos:
 - p: [0, 1]
   k: ESC
