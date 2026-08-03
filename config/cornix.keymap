@@ -128,15 +128,6 @@
             tapping-term-ms = <HM_TAPPING_TERM>;
             quick-tap-ms = <200>;
         };
-
-        bt_key: bt_key {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            bindings = <&bt>, <&kp>;
-
-            flavor = "hold-preferred";
-            tapping-term-ms = <5000>;
-        };
     };
 
     combos {
@@ -248,7 +239,7 @@
 &trans        &kp LEFT_BRACE  &kp AMPERSAND  &kp ASTERISK  &kp LEFT_PARENTHESIS  &kp RIGHT_BRACE                        &trans        &trans  &trans  &trans  &trans  &trans
 &bt BT_SEL 0  &kp COLON       &kp DOLLAR     &kp PERCENT   &kp CARET             &kp PLUS                               &trans        &trans  &trans  &trans  &trans  &trans
 &bt BT_SEL 1  &kp TILDE       &kp EXCL       &kp AT_SIGN   &kp HASH              &kp PIPE               &trans  &trans  &trans        &trans  &trans  &trans  &trans  &trans
-&bt BT_SEL 2  &bt_key BT_CLR  &trans         &trans        &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS                  &kp NUMBER_2  &trans  &trans  &trans  &trans  &trans
+&bt BT_SEL 2  &bt BT_CLR      &trans         &trans        &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS                  &kp NUMBER_2  &trans  &trans  &trans  &trans  &trans
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
