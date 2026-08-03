@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - upgrade-zephyr-4.1
     paths:
       - "config/**"
       - "boards/**"
