@@ -20,9 +20,7 @@
 #define RAISE    1
 #define SYMBOL   2
 #define NAVI     3
-#define NAVIG    3
 #define NUMBER   4
-#define MIX      4
 #define FUNCTION 5
 
 // https://github.com/urob/zmk-config/tree/main#timeless-homerow-mods
