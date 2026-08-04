@@ -130,11 +130,11 @@
         };
 
         // Hold for 5 seconds to clear the current Bluetooth profile.
-        // Tap fires &none (safe). &bt has #binding-cells=<2>, giving this
-        // hold-tap #binding-cells=<2>. Usage: &bt_clr_hold BT_CLR
+        // Tap fires &none (0 binding-cells), hold fires &bt (1 binding-cell).
+        // So this hold-tap has #binding-cells = <1>. Usage: &bt_clr_hold BT_CLR
         bt_clr_hold: bt_clr_hold {
             compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
+            #binding-cells = <1>;
             bindings = <&bt>, <&none>;
             flavor = "hold-preferred";
             tapping-term-ms = <5000>;
