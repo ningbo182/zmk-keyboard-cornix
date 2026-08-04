@@ -130,21 +130,14 @@
         };
 
         // Hold for 5 seconds to clear the current Bluetooth profile.
-        // Tap does nothing — accidental short presses are safe.
+        // Tap fires &none (safe). &bt has #binding-cells=<2>, giving this
+        // hold-tap #binding-cells=<2>. Usage: &bt_clr_hold BT_CLR
         bt_clr_hold: bt_clr_hold {
             compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <0>;
-            bindings = <&bt_clr_macro>, <&none>;
+            #binding-cells = <2>;
+            bindings = <&bt>, <&none>;
             flavor = "hold-preferred";
             tapping-term-ms = <5000>;
-        };
-    };
-
-    macros {
-        bt_clr_macro: bt_clr_macro {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&bt BT_CLR>;
         };
     };
 
@@ -257,7 +250,7 @@
 &trans        &kp LEFT_BRACE  &kp AMPERSAND  &kp ASTERISK  &kp LEFT_PARENTHESIS  &kp RIGHT_BRACE                        &trans        &trans             &trans  &trans  &trans  &trans
 &bt BT_SEL 0  &kp COLON       &kp DOLLAR     &kp PERCENT   &kp CARET             &kp UNDER                              &kp PLUS      &kp DOUBLE_QUOTES  &trans  &trans  &trans  &trans
 &bt BT_SEL 1  &kp TILDE       &kp EXCL       &kp AT_SIGN   &kp HASH              &kp PIPE               &trans  &trans  &trans        &trans             &trans  &trans  &trans  &trans
-&bt BT_SEL 2  &bt_clr_hold    &trans         &trans        &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS                  &kp NUMBER_2  &trans             &trans  &trans  &trans  &trans
+&bt BT_SEL 2  &bt_clr_hold BT_CLR  &trans         &trans        &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS                  &kp NUMBER_2  &trans             &trans  &trans  &trans  &trans
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
