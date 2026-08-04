@@ -250,7 +250,7 @@
             display-name = "Navigation";
             bindings = <
 &kp C_POWER  &kp LG(N1)  &kp LG(N2)  &kp LG(N3)  &kp LG(N4)    &kp LG(N5)                  &kp LG(N6)      &kp LG(N7)  &kp LG(N8)    &kp LG(N9)  &kp LG(N0)       &trans
-&trans       &trans      &trans      &trans      &trans        &trans                      &kp LEFT_ARROW  &kp DOWN    &kp UP_ARROW  &kp RIGHT   &trans           &trans
+&trans       &trans      &trans      &trans      &kp LC(UP)    &trans                      &kp LEFT_ARROW  &kp DOWN    &kp UP_ARROW  &kp RIGHT   &trans           &trans
 &trans       &trans      &trans      &trans      &trans        &trans      &trans  &trans  &kp HOME        &kp PG_DN   &kp PG_UP     &kp END     &kp PRINTSCREEN  &trans
 &trans       &trans      &trans      &trans      &kp NUMBER_3  &trans                      &trans          &trans      &trans        &trans      &trans           &trans
             >;
